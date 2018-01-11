@@ -1,3 +1,3 @@
 # list
 
-React Material list implementation
+React Material list implementation.

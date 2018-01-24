@@ -1,39 +1,39 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import ListItemStartDetailAvatar from './list-item-start-detail-avatar';
+import ListItemGraphicAvatar from './list-item-graphic-avatar';
 
 const AVATAR = 'AVATAR';
 const TITLE = 'TITLE';
 
-test('ListItemStartDetailAvatar > Renders the default classNames', () => {
+test('ListItemGraphicAvatar > Renders the default classNames', () => {
   const wrapper = shallow(
-    <ListItemStartDetailAvatar avatar={AVATAR} title={TITLE} />,
+    <ListItemGraphicAvatar avatar={AVATAR} title={TITLE} />,
     { disableLifecycleMethods: true },
   );
-  const expected = 'mdc-list-item__start-detail';
+  const expected = 'mdc-list-item__graphic';
 
   const actual = wrapper.props().className;
 
   expect(actual).toBe(expected);
 });
 
-test('ListItemStartDetailAvatar > Renders additional classNames', () => {
+test('ListItemGraphicAvatar > Renders additional classNames', () => {
   const CLASS_NAME = 'CLASS_NAME';
   const wrapper = shallow(
-    <ListItemStartDetailAvatar avatar={AVATAR} className={CLASS_NAME} title={TITLE} />,
+    <ListItemGraphicAvatar avatar={AVATAR} className={CLASS_NAME} title={TITLE} />,
     { disableLifecycleMethods: true },
   );
-  const expected = `mdc-list-item__start-detail ${CLASS_NAME}`;
+  const expected = `mdc-list-item__graphic ${CLASS_NAME}`;
 
   const actual = wrapper.props().className;
 
   expect(actual).toBe(expected);
 });
 
-test('ListItemStartDetailAvatar > Renders title as alt text', () => {
+test('ListItemGraphicAvatar > Renders title as alt text', () => {
   const wrapper = shallow(
-    <ListItemStartDetailAvatar avatar={AVATAR} title={TITLE} />,
+    <ListItemGraphicAvatar avatar={AVATAR} title={TITLE} />,
     { disableLifecycleMethods: true },
   );
   const expected = TITLE;
@@ -43,9 +43,9 @@ test('ListItemStartDetailAvatar > Renders title as alt text', () => {
   expect(actual).toBe(expected);
 });
 
-test('ListItemStartDetailAvatar > Renders avatar as image src', () => {
+test('ListItemGraphicAvatar > Renders avatar as image src', () => {
   const wrapper = shallow(
-    <ListItemStartDetailAvatar avatar={AVATAR} title={TITLE} />,
+    <ListItemGraphicAvatar avatar={AVATAR} title={TITLE} />,
     { disableLifecycleMethods: true },
   );
   const expected = AVATAR;

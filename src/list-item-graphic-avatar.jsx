@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const getClassNames = className => classnames({
-  'mdc-list-item__start-detail': true,
+  'mdc-list-item__graphic': true,
   [className]: !!className,
 });
 
-const ListItemStartDetailAvatar = ({ avatar, className, title }) => (
+const ListItemGraphicAvatar = ({ avatar, className, title }) => (
   <img
     alt={title}
     className={getClassNames(className)}
@@ -17,14 +17,14 @@ const ListItemStartDetailAvatar = ({ avatar, className, title }) => (
   />
 );
 
-ListItemStartDetailAvatar.propTypes = {
+ListItemGraphicAvatar.propTypes = {
   avatar: PropTypes.string.isRequired,
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 
-ListItemStartDetailAvatar.defaultProps = {
+ListItemGraphicAvatar.defaultProps = {
   className: undefined,
 };
 
-export default ListItemStartDetailAvatar;
+export default ListItemGraphicAvatar;

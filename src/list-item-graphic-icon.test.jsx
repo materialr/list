@@ -1,38 +1,38 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import ListItemStartDetailIcon from './list-item-start-detail-icon';
+import ListItemGraphicIcon from './list-item-graphic-icon';
 
 const ICON = 'ICON';
 
-test('ListItemStartDetailIcon > Renders the default classNames', () => {
+test('ListItemGraphicIcon > Renders the default classNames', () => {
   const wrapper = shallow(
-    <ListItemStartDetailIcon icon={ICON} />,
+    <ListItemGraphicIcon icon={ICON} />,
     { disableLifecycleMethods: true },
   );
-  const expected = 'mdc-list-item__start-detail';
+  const expected = 'mdc-list-item__graphic';
 
   const actual = wrapper.props().className;
 
   expect(actual).toBe(expected);
 });
 
-test('ListItemStartDetailIcon > Renders additional classNames', () => {
+test('ListItemGraphicIcon > Renders additional classNames', () => {
   const CLASS_NAME = 'CLASS_NAME';
   const wrapper = shallow(
-    <ListItemStartDetailIcon className={CLASS_NAME} icon={ICON} />,
+    <ListItemGraphicIcon className={CLASS_NAME} icon={ICON} />,
     { disableLifecycleMethods: true },
   );
-  const expected = `mdc-list-item__start-detail ${CLASS_NAME}`;
+  const expected = `mdc-list-item__graphic ${CLASS_NAME}`;
 
   const actual = wrapper.props().className;
 
   expect(actual).toBe(expected);
 });
 
-test('ListItemStartDetailIcon > Renders icon as a child', () => {
+test('ListItemGraphicIcon > Renders icon as a child', () => {
   const wrapper = shallow(
-    <ListItemStartDetailIcon icon={ICON} />,
+    <ListItemGraphicIcon icon={ICON} />,
     { disableLifecycleMethods: true },
   );
   const expected = ICON;

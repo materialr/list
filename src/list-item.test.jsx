@@ -42,7 +42,7 @@ test('ListItem > Passes anchorProps, classNames, href and children to an anchor'
   );
   const anchorProps = wrapper.find('a').props();
   const expectedFirst = ANCHOR_PROP_VALUE;
-  const expectedSecond = getClassNames(CLASS_NAME);
+  const expectedSecond = getClassNames(false, CLASS_NAME);
   const expectedThird = HREF;
   const expectedFourth = CHILDREN;
 
@@ -85,7 +85,7 @@ test('ListItem > Passes anchorProps, classNames and children to a custom anchor 
   );
   const anchorComponentProps = wrapper.find(ANCHOR_COMPONENT).props();
   const expectedFirst = ANCHOR_PROP_VALUE;
-  const expectedSecond = getClassNames(CLASS_NAME);
+  const expectedSecond = getClassNames(false, CLASS_NAME);
   const expectedThird = CHILDREN;
 
   const actualFirst = anchorComponentProps[ANCHOR_PROP_KEY];
@@ -118,7 +118,7 @@ test('ListItem > Passes classNames and children to a list item', () => {
     { disableLifecycleMethods: true },
   );
   const listItemProps = wrapper.find('li').props();
-  const expectedFirst = getClassNames(CLASS_NAME);
+  const expectedFirst = getClassNames(false, CLASS_NAME);
   const expectedSecond = CHILDREN;
 
   const actualFirst = listItemProps.className;
@@ -137,9 +137,9 @@ test('ListItem > getClassNames > Renders the default classNames', () => {
 });
 
 test('ListItem > getClassNames > Renders additional classNames', () => {
-  const expected = `mdc-list-item ${CLASS_NAME}`;
+  const expected = `mdc-list-item mdc-list-item--activated ${CLASS_NAME}`;
 
-  const actual = getClassNames(CLASS_NAME);
+  const actual = getClassNames(true, CLASS_NAME);
 
   expect(actual).toBe(expected);
 });

@@ -4,54 +4,48 @@ import React from 'react';
 
 import '@material/list/mdc-list.scss';
 
-export const DISPLAY_NAV = 'nav';
-export const DISPLAY_LIST = 'list';
-
-const getClassNames = (className, hasDarkTheme, isAvatarList, isDenseList, isTwoLineList) =>
-  classnames({
-    'mdc-list': true,
-    'mdc-list--theme-dark': hasDarkTheme,
-    'mdc-list--avatar-list': isAvatarList,
-    'mdc-list--dense': isDenseList,
-    'mdc-list--two-line': isTwoLineList,
-    [className]: !!className,
-  });
-
-const isNavList = display => display === DISPLAY_NAV;
-
-const List = ({
-  children,
-  className,
-  display,
-  hasDarkTheme,
-  isAvatarList,
-  isDenseList,
-  isTwoLineList,
-}) => {
-  const classNames =
-    getClassNames(className, hasDarkTheme, isAvatarList, isDenseList, isTwoLineList);
-  return isNavList(display) ?
-    <nav className={classNames}>{children}</nav> :
-    <ul className={classNames}>{children}</ul>;
-};
+class List extends React.Component {
+  constructor(props) {
+    super(props);
+    this.getClassNames = this.getClassNames.bind(this);
+    this.isNavList = this.isNavList.bind(this);
+  }
+  getClassNames() {
+    const { avatar, className, dense, twoLines } = this.props;
+    return classnames({
+      'mdc-list': true,
+      'mdc-list--avatar-list': avatar,
+      'mdc-list--dense': dense,
+      'mdc-list--two-line': twoLines,
+      [className]: !!className,
+    });
+  }
+  isNavList() {
+    return this.props.display === 'nav';
+  }
+  render() {
+    const { getClassNames, isNavList, props: { children } } = this;
+    return isNavList() ?
+      <nav className={getClassNames()}>{children}</nav> :
+      <ul className={getClassNames()}>{children}</ul>;
+  }
+}
 
 List.propTypes = {
+  avatar: PropTypes.bool,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  hasDarkTheme: PropTypes.bool,
-  isAvatarList: PropTypes.bool,
-  isDenseList: PropTypes.bool,
-  display: PropTypes.oneOf([DISPLAY_NAV, DISPLAY_LIST]),
-  isTwoLineList: PropTypes.bool,
+  dense: PropTypes.bool,
+  display: PropTypes.oneOf(['nav', 'list']),
+  twoLines: PropTypes.bool,
 };
 
 List.defaultProps = {
+  avatar: false,
   className: undefined,
-  hasDarkTheme: false,
-  isAvatarList: false,
-  isDenseList: false,
-  display: DISPLAY_LIST,
-  isTwoLineList: false,
+  dense: false,
+  display: 'list',
+  twoLines: false,
 };
 
 export default List;

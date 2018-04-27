@@ -2,25 +2,45 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const getClassNames = (activated, className) => classnames({
-  'mdc-list-item': true,
-  'mdc-list-item--activated': activated,
-  [className]: !!className,
-});
-
-const isAnchorListItem = href => !!href;
-const isCustomAnchor = AnchorComponent => !!AnchorComponent;
-
-const ListItem = ({ activated, AnchorComponent, anchorProps, className, children, href }) => {
-  const classNames = getClassNames(activated, className);
-  if (isAnchorListItem(href)) {
-    return <a {...anchorProps} className={classNames} href={href}>{children}</a>;
+class ListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.getClassNames = this.getClassNames.bind(this);
+    this.isAnchorListItem = this.isAnchorListItem.bind(this);
+    this.isCustomAnchor = this.isCustomAnchor.bind(this);
   }
-  if (isCustomAnchor(AnchorComponent)) {
-    return <AnchorComponent {...anchorProps} className={classNames}>{children}</AnchorComponent>;
+  getClassNames() {
+    const { activated, className } = this.props;
+    return classnames({
+      'mdc-list-item': true,
+      'mdc-list-item--activated': activated,
+      [className]: !!className,
+    });
   }
-  return <li className={classNames}>{children}</li>;
-};
+  isAnchorListItem() {
+    return !!this.props.href;
+  }
+  isCustomAnchor() {
+    return !!this.props.AnchorComponent;
+  }
+  render() {
+    const {
+      getClassNames,
+      isAnchorListItem,
+      isCustomAnchor,
+      props: { AnchorComponent, anchorProps, children, href },
+    } = this;
+    if (isAnchorListItem()) {
+      return <a {...anchorProps} className={getClassNames()} href={href}>{children}</a>;
+    }
+    if (isCustomAnchor()) {
+      return (
+        <AnchorComponent {...anchorProps} className={getClassNames()}>{children}</AnchorComponent>
+      );
+    }
+    return <li className={getClassNames()}>{children}</li>;
+  }
+}
 
 ListItem.propTypes = {
   activated: PropTypes.bool,

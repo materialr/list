@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import List, { DISPLAY_NAV } from './list';
+import List from './list';
 
 const CHILDREN = 'CHILDREN';
 
@@ -17,19 +17,11 @@ test('List > Renders the default classNames', () => {
 test('List > Renders additional classNames', () => {
   const CLASS_NAME = 'CLASS_NAME';
   const wrapper = shallow(
-    <List
-      className={CLASS_NAME}
-      hasDarkTheme
-      isAvatarList
-      isDenseList
-      isTwoLineList
-    >
-      {CHILDREN}
-    </List>,
+    <List className={CLASS_NAME} avatar dense twoLines>{CHILDREN}</List>,
     { disableLifecycleMethods: true },
   );
-  const expected = 'mdc-list mdc-list--theme-dark mdc-list--avatar-list ' +
-    `mdc-list--dense mdc-list--two-line ${CLASS_NAME}`;
+  const expected =
+    `mdc-list mdc-list--avatar-list mdc-list--dense mdc-list--two-line ${CLASS_NAME}`;
 
   const actual = wrapper.props().className;
 
@@ -62,10 +54,7 @@ test('List > Passes the className and children to the list', () => {
 });
 
 test('List > Renders as a nav', () => {
-  const wrapper = shallow(
-    <List display={DISPLAY_NAV}>{CHILDREN}</List>,
-    { disableLifecycleMethods: true },
-  );
+  const wrapper = shallow(<List display="nav">{CHILDREN}</List>, { disableLifecycleMethods: true });
   const expectedFirst = false;
   const expectedSecond = true;
 
@@ -77,10 +66,7 @@ test('List > Renders as a nav', () => {
 });
 
 test('List > Passes the className and children to the list', () => {
-  const wrapper = shallow(
-    <List display={DISPLAY_NAV}>{CHILDREN}</List>,
-    { disableLifecycleMethods: true },
-  );
+  const wrapper = shallow(<List display="nav">{CHILDREN}</List>, { disableLifecycleMethods: true });
   const listProps = wrapper.props();
   const expectedFirst = CHILDREN;
   const expectedSecond = 'mdc-list';

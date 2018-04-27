@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import ListItem, { getClassNames } from './list-item';
+import ListItem from './list-item';
 
 const ANCHOR_COMPONENT = () => <p />;
 const ANCHOR_PROP_KEY = 'ANCHOR_PROP_KEY';
@@ -11,7 +11,28 @@ const CHILDREN = 'CHILDREN';
 const CLASS_NAME = 'CLASS_NAME';
 const HREF = 'HREF';
 
-test('ListItem > Renders an anchor', () => {
+test('Renders the default classNames', () => {
+  const wrapper = shallow(<ListItem>{CHILDREN}</ListItem>, { disableLifecycleMethods: true });
+  const expected = 'mdc-list-item';
+
+  const actual = wrapper.props().className;
+
+  expect(actual).toBe(expected);
+});
+
+test('Renders additional classNames based on props', () => {
+  const wrapper = shallow(
+    <ListItem activated className={CLASS_NAME}>{CHILDREN}</ListItem>,
+    { disableLifecycleMethods: true },
+  );
+  const expected = `mdc-list-item mdc-list-item--activated ${CLASS_NAME}`;
+
+  const actual = wrapper.props().className;
+
+  expect(actual).toBe(expected);
+});
+
+test('Renders an anchor', () => {
   const wrapper = shallow(
     <ListItem href={HREF}>{CHILDREN}</ListItem>,
     { disableLifecycleMethods: true },
@@ -29,7 +50,7 @@ test('ListItem > Renders an anchor', () => {
   expect(actualThird).toBe(expectedThird);
 });
 
-test('ListItem > Passes anchorProps, classNames, href and children to an anchor', () => {
+test('Passes anchorProps, href and children to an anchor', () => {
   const wrapper = shallow(
     <ListItem
       anchorProps={ANCHOR_PROPS}
@@ -42,22 +63,19 @@ test('ListItem > Passes anchorProps, classNames, href and children to an anchor'
   );
   const anchorProps = wrapper.find('a').props();
   const expectedFirst = ANCHOR_PROP_VALUE;
-  const expectedSecond = getClassNames(false, CLASS_NAME);
-  const expectedThird = HREF;
-  const expectedFourth = CHILDREN;
+  const expectedSecond = HREF;
+  const expectedThird = CHILDREN;
 
   const actualFirst = anchorProps[ANCHOR_PROP_KEY];
-  const actualSecond = anchorProps.className;
-  const actualThird = anchorProps.href;
-  const actualFourth = anchorProps.children;
+  const actualSecond = anchorProps.href;
+  const actualThird = anchorProps.children;
 
   expect(actualFirst).toBe(expectedFirst);
   expect(actualSecond).toBe(expectedSecond);
   expect(actualThird).toBe(expectedThird);
-  expect(actualFourth).toBe(expectedFourth);
 });
 
-test('ListItem > Renders a custom anchor component', () => {
+test('Renders a custom anchor component', () => {
   const wrapper = shallow(<ListItem AnchorComponent={ANCHOR_COMPONENT}>{CHILDREN}</ListItem>);
   const expectedFirst = false;
   const expectedSecond = true;
@@ -72,7 +90,7 @@ test('ListItem > Renders a custom anchor component', () => {
   expect(actualThird).toBe(expectedThird);
 });
 
-test('ListItem > Passes anchorProps, classNames and children to a custom anchor component', () => {
+test('Passes anchorProps and children to a custom anchor component', () => {
   const wrapper = shallow(
     <ListItem
       AnchorComponent={ANCHOR_COMPONENT}
@@ -85,19 +103,16 @@ test('ListItem > Passes anchorProps, classNames and children to a custom anchor 
   );
   const anchorComponentProps = wrapper.find(ANCHOR_COMPONENT).props();
   const expectedFirst = ANCHOR_PROP_VALUE;
-  const expectedSecond = getClassNames(false, CLASS_NAME);
-  const expectedThird = CHILDREN;
+  const expectedSecond = CHILDREN;
 
   const actualFirst = anchorComponentProps[ANCHOR_PROP_KEY];
-  const actualSecond = anchorComponentProps.className;
-  const actualThird = anchorComponentProps.children;
+  const actualSecond = anchorComponentProps.children;
 
   expect(actualFirst).toBe(expectedFirst);
   expect(actualSecond).toBe(expectedSecond);
-  expect(actualThird).toBe(expectedThird);
 });
 
-test('ListItem > Renders a list item', () => {
+test('Renders a list item', () => {
   const wrapper = shallow(<ListItem>{CHILDREN}</ListItem>);
   const expectedFirst = false;
   const expectedSecond = false;
@@ -112,34 +127,15 @@ test('ListItem > Renders a list item', () => {
   expect(actualThird).toBe(expectedThird);
 });
 
-test('ListItem > Passes classNames and children to a list item', () => {
+test('Passes children to a list item', () => {
   const wrapper = shallow(
     <ListItem className={CLASS_NAME}>{CHILDREN}</ListItem>,
     { disableLifecycleMethods: true },
   );
   const listItemProps = wrapper.find('li').props();
-  const expectedFirst = getClassNames(false, CLASS_NAME);
-  const expectedSecond = CHILDREN;
+  const expected = CHILDREN;
 
-  const actualFirst = listItemProps.className;
-  const actualSecond = listItemProps.children;
-
-  expect(actualFirst).toBe(expectedFirst);
-  expect(actualSecond).toBe(expectedSecond);
-});
-
-test('ListItem > getClassNames > Renders the default classNames', () => {
-  const expected = 'mdc-list-item';
-
-  const actual = getClassNames();
-
-  expect(actual).toBe(expected);
-});
-
-test('ListItem > getClassNames > Renders additional classNames', () => {
-  const expected = `mdc-list-item mdc-list-item--activated ${CLASS_NAME}`;
-
-  const actual = getClassNames(true, CLASS_NAME);
+  const actual = listItemProps.children;
 
   expect(actual).toBe(expected);
 });

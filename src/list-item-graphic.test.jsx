@@ -88,3 +88,16 @@ test('ListItemGraphic > titlePropType > Throws an error when an avatar but no ti
 
   expect(actual).toEqual(expected);
 });
+
+test('ListItemGraphic > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <ListItemGraphic data-qa={DATA_QA} icon={ICON} />,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

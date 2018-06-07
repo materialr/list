@@ -7,8 +7,8 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListGroup = ({ className, children }) => (
-  <div className={getClassNames(className)}>
+const ListGroup = ({ className, children, ...props }) => (
+  <div className={getClassNames(className)} {...props}>
     {children}
   </div>
 );

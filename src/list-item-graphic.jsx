@@ -15,10 +15,10 @@ export const titlePropType = (props, propName, componentName) => (
     null
 );
 
-const ListItemGraphic = ({ avatar, className, icon, title }) => (
+const ListItemGraphic = ({ avatar, className, icon, title, ...props }) => (
   icon ?
-    <ListItemGraphicIcon className={className} icon={icon} /> :
-    <ListItemGraphicAvatar avatar={avatar} className={className} title={title} />
+    <ListItemGraphicIcon className={className} icon={icon} {...props} /> :
+    <ListItemGraphicAvatar avatar={avatar} className={className} title={title} {...props} />
 );
 
 ListItemGraphic.propTypes = {

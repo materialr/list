@@ -7,13 +7,14 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListItemGraphicAvatar = ({ avatar, className, title }) => (
+const ListItemGraphicAvatar = ({ avatar, className, title, ...props }) => (
   <img
     alt={title}
     className={getClassNames(className)}
     height="56"
     src={avatar}
     width="56"
+    {...props}
   />
 );
 

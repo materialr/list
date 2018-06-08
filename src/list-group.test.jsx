@@ -35,3 +35,16 @@ test('ListGroup > Renders children as a child', () => {
 
   expect(actual).toBe(expected);
 });
+
+test('ListGroup > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <ListGroup data-qa={DATA_QA}>{CHILDREN}</ListGroup>,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

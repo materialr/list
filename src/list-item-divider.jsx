@@ -8,8 +8,8 @@ const getClassNames = (className, inset) => classnames({
   [className]: !!className,
 });
 
-const ListItemDivider = ({ className, inset }) => (
-  <li className={getClassNames(className, inset)} />
+const ListItemDivider = ({ className, inset, ...props }) => (
+  <li className={getClassNames(className, inset)} {...props} />
 );
 
 ListItemDivider.propTypes = {

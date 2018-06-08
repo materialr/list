@@ -24,3 +24,16 @@ test('ListItemDivider > Renders additional classNames', () => {
 
   expect(actual).toBe(expected);
 });
+
+test('ListItemDivider > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <ListItemDivider data-qa={DATA_QA} />,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

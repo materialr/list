@@ -35,3 +35,16 @@ test('ListGroupSubheader > Renders title as a child', () => {
 
   expect(actual).toBe(expected);
 });
+
+test('ListGroupSubheader > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <ListGroupSubheader data-qa={DATA_QA} title={TITLE} />,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

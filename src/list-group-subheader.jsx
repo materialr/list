@@ -7,8 +7,8 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListGroupSubheader = ({ className, title }) => (
-  <h3 className={getClassNames(className)}>
+const ListGroupSubheader = ({ className, title, ...props }) => (
+  <h3 className={getClassNames(className)} {...props}>
     {title}
   </h3>
 );

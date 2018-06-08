@@ -24,10 +24,22 @@ class List extends React.Component {
     return this.props.display === 'nav';
   }
   render() {
-    const { getClassNames, isNavList, props: { children } } = this;
+    const {
+      getClassNames,
+      isNavList,
+      props: {
+        avatar,
+        children,
+        className,
+        dense,
+        display,
+        twoLines,
+        ...props
+      },
+    } = this;
     return isNavList() ?
-      <nav className={getClassNames()}>{children}</nav> :
-      <ul className={getClassNames()}>{children}</ul>;
+      <nav className={getClassNames()} {...props}>{children}</nav> :
+      <ul className={getClassNames()} {...props}>{children}</ul>;
   }
 }
 

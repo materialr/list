@@ -28,17 +28,31 @@ class ListItem extends React.Component {
       getClassNames,
       isAnchorListItem,
       isCustomAnchor,
-      props: { AnchorComponent, anchorProps, children, href },
+      props: {
+        activated,
+        AnchorComponent,
+        anchorProps,
+        className,
+        children,
+        href,
+        ...props
+      },
     } = this;
     if (isAnchorListItem()) {
-      return <a {...anchorProps} className={getClassNames()} href={href}>{children}</a>;
+      return <a {...anchorProps} className={getClassNames()} href={href} {...props}>{children}</a>;
     }
     if (isCustomAnchor()) {
       return (
-        <AnchorComponent {...anchorProps} className={getClassNames()}>{children}</AnchorComponent>
+        <AnchorComponent
+          className={getClassNames()}
+          {...anchorProps}
+          {...props}
+        >
+          {children}
+        </AnchorComponent>
       );
     }
-    return <li className={getClassNames()}>{children}</li>;
+    return <li className={getClassNames()} {...props}>{children}</li>;
   }
 }
 

@@ -7,8 +7,8 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListItemText = ({ className, children }) => (
-  <span className={getClassNames(className)}>
+const ListItemText = ({ className, children, ...props }) => (
+  <span className={getClassNames(className)} {...props}>
     {children}
   </span>
 );

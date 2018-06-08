@@ -7,8 +7,8 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListItemGraphicIcon = ({ className, icon }) => (
-  <span className={getClassNames(className)} role="presentation">
+const ListItemGraphicIcon = ({ className, icon, ...props }) => (
+  <span className={getClassNames(className)} role="presentation" {...props}>
     <i aria-hidden="true" className="material-icons">{icon}</i>
   </span>
 );

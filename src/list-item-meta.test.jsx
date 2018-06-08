@@ -56,3 +56,16 @@ test('ListItemMeta > Renders title as title and aria-label', () => {
   expect(actualFirst).toBe(expected);
   expect(actualSecond).toBe(expected);
 });
+
+test('ListItemMeta > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <ListItemMeta data-qa={DATA_QA} icon={ICON} title={TITLE} />,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

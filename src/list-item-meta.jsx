@@ -14,12 +14,13 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListItemMeta = ({ className, icon, onClick, title }) => (
+const ListItemMeta = ({ className, icon, onClick, title, ...props }) => (
   <a
     aria-label={title}
     className={getClassNames(className)}
     onClick={onClick}
     title={title}
+    {...props}
   >
     {icon}
   </a>

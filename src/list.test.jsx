@@ -77,3 +77,16 @@ test('List > Passes the className and children to the list', () => {
   expect(actualFirst).toBe(expectedFirst);
   expect(actualSecond).toBe(expectedSecond);
 });
+
+test('List > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <List data-qa={DATA_QA}>{CHILDREN}</List>,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

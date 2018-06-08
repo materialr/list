@@ -54,3 +54,16 @@ test('ListItemGraphicAvatar > Renders avatar as image src', () => {
 
   expect(actual).toBe(expected);
 });
+
+test('ListItemGraphicAvatar > Passes through additional props', () => {
+  const DATA_QA = 'DATA_QA';
+  const wrapper = shallow(
+    <ListItemGraphicAvatar avatar={AVATAR} title={TITLE} data-qa={DATA_QA} />,
+    { disableLifecycleMethods: true },
+  );
+  const expected = DATA_QA;
+
+  const actual = wrapper.props()['data-qa'];
+
+  expect(actual).toBe(expected);
+});

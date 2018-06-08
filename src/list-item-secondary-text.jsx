@@ -7,8 +7,8 @@ const getClassNames = className => classnames({
   [className]: !!className,
 });
 
-const ListItemSecondaryText = ({ className, text }) => (
-  <span className={getClassNames(className)}>
+const ListItemSecondaryText = ({ className, text, ...props }) => (
+  <span className={getClassNames(className)} {...props}>
     {text}
   </span>
 );
